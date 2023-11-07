@@ -44,8 +44,9 @@ class PointControllerTests {
 
 		given(pointService.addScore(any(Integer.class))).willAnswer((invocation) -> score);
 
-		this.mockMvc.perform(post("/api/addScore?score=33")
-						.contentType(MediaType.APPLICATION_JSON_VALUE))
+		this.mockMvc.perform(post("/api/score")
+						.contentType(MediaType.APPLICATION_JSON_VALUE)
+						.content(objectMapper.writeValueAsString(new Score().setScore(33))))
 				.andExpect(status().isNoContent())
 				.andExpect(content().json(objectMapper.writeValueAsString(responseEntity)));
 	}
@@ -58,7 +59,7 @@ class PointControllerTests {
 
 		given(pointService.addScore(any(Integer.class))).willAnswer((invocation) -> score);
 
-		this.mockMvc.perform(post("/api/addScore")
+		this.mockMvc.perform(post("/api/score")
 						.contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isBadRequest())
 				.andExpect(content().json(objectMapper.writeValueAsString(message)));
@@ -70,8 +71,9 @@ class PointControllerTests {
 
 		given(pointService.addScore(any(Integer.class))).willThrow(new DataIntegrityViolationException(""));
 
-		this.mockMvc.perform(post("/api/addScore?score=23")
-						.contentType(MediaType.APPLICATION_JSON_VALUE))
+		this.mockMvc.perform(post("/api/score")
+						.contentType(MediaType.APPLICATION_JSON_VALUE)
+						.content(objectMapper.writeValueAsString(new Score().setScore(23))))
 				.andExpect(status().isInternalServerError())
 				.andExpect(content().json(objectMapper.writeValueAsString(message)));
 	}
