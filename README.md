@@ -16,9 +16,9 @@ https://www.postgresql.org/download/
 ### Run Local Instance
 Update password in `src/main/resources/application.properties` for local Postgresql database
 
-Build and run application in IDE, such as Intellij
-`src/main/java/edu/school/admin/AdminApplication.java`
-Or
+Build and run application (`src/main/java/edu/school/admin/AdminApplication.java`) in IDE, such as Intellij
+
+#### Or
 
 Package and run application via command line
 
